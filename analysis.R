@@ -7,3 +7,9 @@ head(df)
 df %>%
   group_by(INCARCERATED_BEFORE) %>%
   summarize(mean(all_death))
+
+# OH WAIT MAYBE IT'S AGE
+df %>%
+  group_by(AGE_BUCKET, INCARCERATED_BEFORE) %>%
+  summarize(mean(all_death), n()) %>%
+  arrange(AGE_BUCKET, INCARCERATED_BEFORE)
