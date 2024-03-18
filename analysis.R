@@ -15,4 +15,12 @@ df %>%
 df %>%
   group_by(AGE_BUCKET, INCARCERATED_BEFORE) %>%
   summarize(mean_death = mean(all_death), n=n()) %>%
-  arrange(AGE_BUCKET, INCARCERATED_BEFORE)
+  arrange(AGE_BUCKET, INCARCERATED_BEFORE) %>%
+  ggplot() + geom_bar(aes(x=AGE_BUCKET, y=mean_death, fill=INCARCERATED_BEFORE),
+                      position='dodge', stat='identity')
+
+model1 <- lm(all_death ~ INCARCERATED_BEFORE, data=df)
+summary(model1)
+
+model2 <- lm(all_death ~ INCARCERATED_BEFORE + AGE_BUCKET, data=df)
+summary(model2)
